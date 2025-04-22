@@ -1,19 +1,30 @@
-// components/BuildingCard.jsx
-import React from 'react'
+// components/BuildingsCard.jsx
+import React from 'react';
 
-const BuildingCard = ({ name, image, description }) => {
+const BuildingCard = ({ name, image, description, onViewDetails }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-      <img src={image} alt={name} className="w-full h-48 object-cover" />
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{name}</h3>
-        <p className="text-gray-600">{description}</p>
-        <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      {image && (
+        <div className="h-48 overflow-hidden">
+          <img 
+            src={image} 
+            alt={name} 
+            className="w-full h-full object-cover" 
+          />
+        </div>
+      )}
+      <div className="p-4">
+        <h2 className="text-xl font-semibold mb-2">{name}</h2>
+        <p className="text-gray-600 mb-4 line-clamp-3">{description}</p>
+        <button 
+          onClick={onViewDetails}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
           View Details
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BuildingCard
+export default BuildingCard;

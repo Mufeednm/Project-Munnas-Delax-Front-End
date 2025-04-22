@@ -20,3 +20,16 @@ export const fetchVacantRooms = async () => {
     throw error;
   }
   };
+
+
+  export const getBuildingById = async (buildingId) => {
+    try {
+        console.log("in axios ",buildingId);
+      // For GET requests, if you need to send data in the request body:
+      const response = await axios.post('/buildings/details', {buildingId});
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching building ${buildingId}:`, error);
+      throw error;
+    }
+  };
