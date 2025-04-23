@@ -6,7 +6,6 @@ import Buildings from '../../components/HomepageComponents/Building.jsx';
 import VacantRooms from '../../components/HomepageComponents/VacantRooms.jsx';
 import Contact from '../../components/HomepageComponents/Contact.jsx';
 import Footer from '../../components/HomepageComponents/Footer.jsx';
-import BuildingDetails from '../../components/HomepageComponents/BuidingDetials.jsx';
 
 
 const Home = () => {
@@ -24,7 +23,6 @@ const Home = () => {
         <Buildings />
       </section>
 
-      <BuildingDetails/>
 
       
       {/* Rental Spaces section with id="rental-spaces" */}

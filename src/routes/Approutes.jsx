@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Admin from '../pages/Admin/Admin';
 import NotFound from '../pages/NotFound';
 import React from 'react';
+import BuildingDetails from '../pages/Home/BuildingDetails';
 
 
 
@@ -14,6 +15,7 @@ const AppRoutes = () => {
     <Routes>
       {/* Public routes */}
       <Route path="/" element={<Home />} />
+      <Route path="/buildings/:buildingId" element={<BuildingDetails />} />
       
       {/* Auth routes */}
      

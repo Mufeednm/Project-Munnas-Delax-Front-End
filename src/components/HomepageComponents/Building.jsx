@@ -1,14 +1,14 @@
-// components/Buildings.jsx
+// components/HomepageComponents/Building.jsx
 import React, { useState, useEffect } from 'react';
 import { getAllbuildings } from '../../api/Homeapi';
 import BuildingCard from './BuildingsCard';
-import BuildingDetails from './BuidingDetials';
+import { useNavigate } from 'react-router-dom';
 
 const Buildings = () => {
   const [buildings, setBuildings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedBuildingId, setSelectedBuildingId] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getBuildings = async () => {
@@ -28,11 +28,8 @@ const Buildings = () => {
   }, []);
 
   const handleViewDetails = (buildingId) => {
-    setSelectedBuildingId(buildingId);
-  };
-
-  const handleBackToList = () => {
-    setSelectedBuildingId(null);
+    // Navigate to the building details page with the building ID
+    navigate(`/buildings/${buildingId}`);
   };
 
   if (loading) return (
@@ -46,10 +43,6 @@ const Buildings = () => {
       <p className="text-red-500 text-xl">{error}</p>
     </div>
   );
-
-  if (selectedBuildingId) {
-    return <BuildingDetails buildingId={selectedBuildingId} onBack={handleBackToList} />;
-  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -71,6 +64,6 @@ const Buildings = () => {
       )}
     </div>
   );
-};
+};  
 
 export default Buildings;
