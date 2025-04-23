@@ -33,24 +33,29 @@ const Buildings = () => {
   };
 
   if (loading) return (
-    <div className="flex justify-center items-center min-h-screen">
-      <p className="text-xl">Loading buildings...</p>
+    <div className="flex justify-center items-center py-16">
+      <div className="animate-pulse flex space-x-2">
+        <div className="h-3 w-3 bg-gray-500 rounded-full"></div>
+        <div className="h-3 w-3 bg-gray-500 rounded-full"></div>
+        <div className="h-3 w-3 bg-gray-500 rounded-full"></div>
+      </div>
+      <p className="text-lg ml-3">Loading buildings...</p>
     </div>
   );
 
   if (error) return (
-    <div className="flex justify-center items-center min-h-screen">
-      <p className="text-red-500 text-xl">{error}</p>
+    <div className="flex justify-center items-center py-16">
+      <p className="text-red-500 text-lg md:text-xl">{error}</p>
     </div>
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Our Buildings</h1>
+    <div className="w-full max-w-7xl mx-auto px-4 py-6 md:py-8">
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-8 text-center">Our Buildings</h1>
       {buildings.length === 0 || !buildings.building ? (
-        <p className="text-center text-xl">No buildings available at the moment.</p>
+        <p className="text-center text-lg md:text-xl">No buildings available at the moment.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {buildings.building.map((building) => (
             <BuildingCard 
               key={building.id} 
