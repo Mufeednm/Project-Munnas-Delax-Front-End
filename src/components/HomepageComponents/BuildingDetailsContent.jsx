@@ -320,7 +320,7 @@ const BuildingDetails = ({ buildingId }) => {
                 {/* Unit details */}
                 <div className="p-5">
                   <div className="flex justify-between items-center mb-3">
-                    <h3 className="text-lg font-semibold">Unit {unit.unitNumber}</h3>
+                    <h3 className="text-lg font-semibold">Room : {unit.unitNumber}</h3>
                     <span className="text-lg font-bold text-blue-600">₹{unit.rent}/mo</span>
                   </div>
                   
