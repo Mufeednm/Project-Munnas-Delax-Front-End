@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api', // 🌐 Your backend URL
+  baseURL: 'https://project-munnas-delax-backend.onrender.com/api', // 🌐 Your backend URL
   headers: {
     'Content-Type': 'application/json',
   },
