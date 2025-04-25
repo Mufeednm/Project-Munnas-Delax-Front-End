@@ -1,6 +1,8 @@
+// components/BuildingDetails.jsx
 import React, { useState, useEffect } from 'react';
 import { getBuildingById } from '../../api/Homeapi';
 import { useNavigate } from 'react-router-dom';
+import UnitRequestModal from './UnitRequest';
 
 const BuildingDetails = ({ buildingId }) => {
   const [building, setBuilding] = useState(null);
@@ -9,6 +11,8 @@ const BuildingDetails = ({ buildingId }) => {
   const [unitStats, setUnitStats] = useState({});
   const [filteredUnits, setFilteredUnits] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUnit, setSelectedUnit] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -81,6 +85,18 @@ const BuildingDetails = ({ buildingId }) => {
     });
 
     return stats;
+  };
+
+  const handleRequestSubmit = async (formData) => {
+    // Replace with your actual API call
+    console.log("Submitting request:", formData);
+    
+    // Mock API call (replace with your actual API)
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ success: true });
+      }, 1000);
+    });
   };
 
   const handletoback = () => {
@@ -351,7 +367,13 @@ const BuildingDetails = ({ buildingId }) => {
                   </div>
                   
                   {unit.status === 'Vacant' ? (
-                    <button className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center">
+                    <button 
+                      onClick={() => {
+                        setSelectedUnit(unit);
+                        setIsModalOpen(true);
+                      }}
+                      className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center"
+                    >
                       <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                       </svg>
@@ -383,6 +405,16 @@ const BuildingDetails = ({ buildingId }) => {
             </div>
           )}
         </div>
+      )}
+
+      {/* Unit Request Modal */}
+      {isModalOpen && (
+        <UnitRequestModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          unitDetails={selectedUnit}
+          onSubmit={handleRequestSubmit}
+        />
       )}
     </div>
   );

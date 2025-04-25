@@ -1,7 +1,6 @@
 // components/HomepageComponents/Building.jsx
 import React, { useState, useEffect } from 'react';
 import { getAllbuildings } from '../../api/Homeapi';
-import BuildingCard from './BuildingsCard';
 import { useNavigate } from 'react-router-dom';
 
 const Buildings = () => {
@@ -23,7 +22,6 @@ const Buildings = () => {
         setLoading(false);
       }
     };
-
 
     getBuildings();
   }, []);
@@ -52,19 +50,42 @@ const Buildings = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-6 md:py-8">
-      <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-8 text-center">Our Buildings</h1>
+      <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center">Our Premium Buildings</h1>
+      
       {buildings.length === 0 || !buildings.building ? (
         <p className="text-center text-lg md:text-xl">No buildings available at the moment.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="flex flex-col md:flex-row gap-8">
           {buildings.building.map((building) => (
-            <BuildingCard 
+            <div 
               key={building.id} 
-              name={building.name} 
-              image={building.image} 
-              description={building.description}
-              onViewDetails={() => handleViewDetails(building.id)}
-            />
+              className="flex-1 bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <div className="relative h-64 overflow-hidden">
+                <img 
+                  src={building.image || '/placeholder-building.jpg'} 
+                  alt={building.name} 
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs px-2 py-1 rounded-full font-bold">
+                  Featured
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-3">{building.name}</h3>
+                <p className="text-gray-600 mb-6">{building.description}</p>
+                
+                <div className="mt-4">
+                  <button
+                    onClick={() => handleViewDetails(building.id)}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300"
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       )}
