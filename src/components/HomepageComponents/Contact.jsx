@@ -9,7 +9,13 @@ const Contact = () => {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
-  const mapRef = useRef(null);
+  
+  // Google Maps location - extracted from your link
+  const googleMapsLocation = {
+    url: "https://maps.app.goo.gl/ftQZ7uHHNUu9DXyR6",
+    // Updated with the Munnas Deluxe Building iframe URL
+    embedUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1204.280872625794!2d76.0567522!3d11.1231617!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba649002dcd46d1%3A0x3b26a828d3f3d2c7!2sMunnas%20Deluxe%20Building!5e1!3m2!1sen!2sin!4v1747034463568!5m2!1sen!2sin"
+  };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -49,25 +55,6 @@ const Contact = () => {
       setSubmitting(false);
     }
   };
-
-  // Initialize map when component mounts
-  useEffect(() => {
-    // This is a placeholder for map initialization
-    // In a real application, you would use a library like Google Maps, Leaflet, or Mapbox
-    const initMap = () => {
-      // Check if the map has already been initialized
-      if (mapRef.current && !mapRef.current.hasChildNodes()) {
-        // This is where you would normally initialize your map
-        // For demo purposes, we're just adding a placeholder
-        const mapPlaceholder = document.createElement('div');
-        mapPlaceholder.className = 'bg-gray-200 w-full h-full flex items-center justify-center';
-        mapPlaceholder.innerHTML = '<p class="text-gray-500">Map would be displayed here</p>';
-        mapRef.current.appendChild(mapPlaceholder);
-      }
-    };
-    
-    initMap();
-  }, []);
 
   return (
     <section id="contact" className="py-12 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
@@ -127,10 +114,35 @@ const Contact = () => {
               <p className="text-gray-600">Saturday - Sunday: Closed</p>
             </div>
             
-            {/* Map */}
+            {/* Map - FIXED HERE */}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden h-64">
-              <div ref={mapRef} className="w-full h-full">
-                {/* Map will be initialized here by useEffect */}
+              {/* Google Maps Embed */}
+              <div className="w-full h-full relative">
+                {/* Updated with the correct Munnas Deluxe Building iframe URL */}
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1204.280872625794!2d76.0567522!3d11.1231617!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba649002dcd46d1%3A0x3b26a828d3f3d2c7!2sMunnas%20Deluxe%20Building!5e1!3m2!1sen!2sin!4v1747034463568!5m2!1sen!2sin"
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen="" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Google Maps Location"
+                ></iframe>
+                
+                {/* Optional: Add a "View larger map" link */}
+                <a 
+                  href={googleMapsLocation.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-2 right-2 bg-white text-blue-600 px-2 py-1 text-xs rounded shadow hover:bg-gray-100 transition duration-200 flex items-center"
+                >
+                  View on Google Maps
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
